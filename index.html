@@ -82,10 +82,10 @@
 
 <script type="module">
   // `cargo xtask web` writes the build's id here, so a browser fetches the new game after each build
-  const BUILD = 'c2c8ae2';
+  const BUILD = 'ce5f83d';
   window.__lelelilo_build = BUILD;
   // Which step of the game's making this is (the file ITERATION says)
-  const ITERATION = '17';
+  const ITERATION = '18';
   window.__lelelilo_iteration = ITERATION;
   const $ = id => document.getElementById(id);
   $('build').textContent = `${ITERATION} · ${BUILD}`;
