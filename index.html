@@ -82,10 +82,10 @@
 
 <script type="module">
   // `cargo xtask web` writes the build's id here, so a browser fetches the new game after each build
-  const BUILD = 'dcbe939';
+  const BUILD = '1874241';
   window.__lelelilo_build = BUILD;
   // Which step of the game's making this is (the file ITERATION says)
-  const ITERATION = '22';
+  const ITERATION = '23';
   window.__lelelilo_iteration = ITERATION;
   const $ = id => document.getElementById(id);
   $('build').textContent = `${ITERATION} · ${BUILD}`;
@@ -118,6 +118,14 @@
   };
   addEventListener('pointerdown', light);
   document.addEventListener('visibilitychange', light);
+  // Browsers start sound only after a tap: the game's audio context (window.__lelelilo_audio) is resumed on the
+  // first one, put to sleep while the page is hidden, and woken when it is shown again
+  const unlock = () => { const a = window.__lelelilo_audio; if (a && a.state !== 'running' && !document.hidden) a.resume().catch(() => {}); };
+  for (const type of ['pointerdown', 'touchend']) addEventListener(type, unlock, { capture: true });
+  document.addEventListener('visibilitychange', () => {
+    const a = window.__lelelilo_audio; if (!a) return;
+    if (document.hidden) a.suspend().catch(() => {}); else if (navigator.userActivation?.hasBeenActive) a.resume().catch(() => {});
+  });
   const show = id => { for (const s of ['loading', 'unsupported', 'failed']) $(s).classList.toggle('hidden', s !== id); };
   const setProgress = k => { $('bar').style.width = `${Math.max(0, Math.min(1, k)) * 100}%`; };
   const fail = e => { console.error(e); $('errtext').textContent = String(e && e.message || e); show('failed'); };
