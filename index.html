@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#f7f3e8">
+<meta name="theme-color" content="#0e0b18">
 <meta name="description" content="Lelelilo Unknown: A game that does not know what it is yet.">
 <meta name="author" content="lelelilo.com">
 <title>Lelelilo Unknown</title>
@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <style>
-  :root { --paper: #f7f3e8; --graphite: #33333b; --faint: #6b6864; --red: #d8605a; }
+  :root { --paper: #0e0b18; --graphite: #e6ebff; --faint: #9a94b8; --red: #ff459e; }
   html, body { margin: 0; height: 100%; background: var(--paper); color: var(--graphite); overflow: hidden; overscroll-behavior: none; }
   body { font: 500 16px ui-rounded, 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
   canvas#lelelilo { position: fixed; inset: 0; width: 100vw; height: 100dvh; display: block; touch-action: none; outline: none; }
@@ -82,10 +82,10 @@
 
 <script type="module">
   // `cargo xtask web` writes the build's id here, so a browser fetches the new game after each build
-  const BUILD = '59f7957';
+  const BUILD = '30e25ba';
   window.__lelelilo_build = BUILD;
   // Which step of the game's making this is (the file ITERATION says)
-  const ITERATION = '20';
+  const ITERATION = '21';
   window.__lelelilo_iteration = ITERATION;
   const $ = id => document.getElementById(id);
   $('build').textContent = `${ITERATION} · ${BUILD}`;
