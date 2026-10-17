@@ -82,13 +82,21 @@
 
 <script type="module">
   // `cargo xtask web` writes the build's id here, so a browser fetches the new game after each build
-  const BUILD = 'ee7f560';
+  const BUILD = '774704e';
   window.__lelelilo_build = BUILD;
   // Which step of the game's making this is (the file ITERATION says)
-  const ITERATION = '26';
+  const ITERATION = '27';
   window.__lelelilo_iteration = ITERATION;
   const $ = id => document.getElementById(id);
   $('build').textContent = `${ITERATION} · ${BUILD}`;
+  // (and how many frames a second the phone draws, counted over each second: the number to tell the studio)
+  let frames = 0, since = performance.now();
+  const count = now => {
+    frames++;
+    if (now - since >= 1000) { $('build').textContent = `${ITERATION} · ${BUILD} · ${Math.round(frames * 1000 / (now - since))} fps`; frames = 0; since = now; }
+    requestAnimationFrame(count);
+  };
+  requestAnimationFrame(count);
 
   // What the phone keeps for itself at each edge (a notch, the home bar), in the page's pixels: top, right, bottom,
   // left. Only a style sheet is told, so an element that nobody sees is padded with them and measured. The checks
